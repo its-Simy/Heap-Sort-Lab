@@ -4,33 +4,21 @@ import java.util.Random;
 public class Main {
 
     public static void heapsort(int[] a) {
-        int[] heap = new int[a.length];
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
         for (int i = 0; i < a.length; i++) {
-            heap[i] = a[i];
+            heap.add(a[i]);
         }
-        int sortedNextOpen = 0;
         int min;
-        //The following will work as a get Min;
-        for (int i = 1; i < heap.length; i++) {
-            min = heap[i];
-            for (int j = i; j > sortedNextOpen; j--) {
-                if (heap[j] < min) {
-                    min = heap[j];
-                }
-            }
-
+        int sortedNextOpen = 0;
+        //Checks if the heap is empty
+        while (!heap.isEmpty()){
+            min = heap.remove();
+            a[sortedNextOpen] = min;
+            sortedNextOpen++;
         }
+
     }//end of heapsort method
-
-    public int getMin(int[] a){
-        int min = a[0];
-        for(int i = 1; i < a.length; i++){
-            if(a[i] < min){
-                min = a[i];
-            }
-        }
-        return min;
-    }//end of the getMin Method
 
     public static void main(String[] args) {
         /*
@@ -45,15 +33,41 @@ public class Main {
         }
         */
 
+        int[] a = new int[]{
+                60,30,20,50,40,10
+        };
+
+        System.out.println("The following is the unsorted array: ");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+        heapsort(a);
+        System.out.println("\nThe following is the sorted array: ");
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+
 
         Random rand = new Random();
-        int[] data = new int[5];
+        int[] data = new int[100];
          int randomNum = rand.nextInt(1000); //generates 0-999 random integers
-         for (int i = 0; i < 5; i++) {
+        System.out.println("The following is the unsorted array: ");
+         for (int i = 0; i < data.length; i++) {
              data[i] = randomNum;
              randomNum = rand.nextInt(1000);
+             System.out.print(data[i] + " ");
          }
          heapsort(data);
+        System.out.println("\n\nThe following is the sorted array: ");
+         for (int i = 0; i < data.length; i++) {
+             System.out.print(data[i] + " ");
+         }
+
+
+
+
 
 
 
